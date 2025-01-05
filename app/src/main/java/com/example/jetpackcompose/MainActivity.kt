@@ -9,9 +9,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.jetpackcompose.basic_layout.HotelBookingScreen
+import com.example.jetpackcompose.statemanagement.StateHoistingDemo
 import com.example.jetpackcompose.ui.theme.JetpackComposeTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +25,16 @@ class MainActivity : ComponentActivity() {
         setContent {
             JetpackComposeTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    HotelBookingScreen(modifier = Modifier.padding(innerPadding))
+//                    HotelBookingScreen(modifier = Modifier.padding(innerPadding))
+                    var count by remember {
+                        mutableIntStateOf(0)
+                    }
+                    StateHoistingDemo(
+                        counter = count,
+                        onButtonCountIncrement = { count++ },
+                        onButtonCountReset = { count = 0 },
+                        modifier = Modifier.padding(innerPadding)
+                    )
 //                    Greeting(
 //                        name = "Android",
 //                        modifier = Modifier.padding(innerPadding)
